@@ -1,5 +1,5 @@
 <?php require __DIR__ . "/header.php"; ?>
-
+<?php header('conteudo.php');?>
 <section class="section">
     <div class="container">
         <div class="columns is-centered">
