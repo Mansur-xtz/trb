@@ -1,9 +1,9 @@
 <?php
-// adicionar_estagio.php
+
 include 'header.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Processa o formulário para adicionar um novo estágio
+    
     $empresa = $_POST['empresa'];
     $funcionario = $_POST['funcionario'];
     $data = $_POST['data'];
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
             <div class="field">
-                <label class="label">Funcionário:</label>
+                <label class="label">Numero de Funcionário:</label>
                 <div class="control">
                     <input class="input" type="text" name="funcionario" required>
                 </div>

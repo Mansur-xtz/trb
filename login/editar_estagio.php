@@ -1,19 +1,19 @@
 <?php
-// editar_estagio.php
+
 include 'header.php';
 
-// Verifica se o 'id' está na URL
+
 if (!isset($_GET['id'])) {
     echo "<p class='notification is-danger'>ID do estágio não especificado.</p>";
-    exit; // Para a execução do script
+    exit; 
 }
 
 $db = new SQLite3('banco.db');
-$id = (int) $_GET['id']; // Cast para garantir que seja um inteiro
+$id = isset($_GET['id']) ? $_GET['id'] :""; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['atualizar'])) {
-        // Atualiza os dados do estágio
+      
         $empresa = $_POST['empresa'];
         $funcionario = $_POST['funcionario'];
         $data = $_POST['data'];
@@ -35,11 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
 
         echo "<p class='notification is-danger'>Estágio excluído com sucesso!</p>";
-        exit; // Para evitar que o formulário de edição apareça após a exclusão
+        exit; 
     }
 }
 
-// Pega os dados atuais do estágio
+
 $stmt = $db->prepare("SELECT * FROM estagios WHERE id = :id");
 $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
 $result = $stmt->execute()->fetchArray(SQLITE3_ASSOC);

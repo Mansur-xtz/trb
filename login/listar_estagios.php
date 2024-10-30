@@ -1,8 +1,8 @@
 <?php
-// listar_estagios.php
+
 include 'header.php';
 
-// Conexão com o banco de dados
+
 $db = new SQLite3('banco.db');
 $results = $db->query("SELECT * FROM estagios");
 
@@ -27,7 +27,7 @@ while ($row = $results->fetchArray(SQLITE3_ASSOC)) {
 echo "</tbody>";
 echo "</table>";
 
-// Botão de voltar
+
 echo "<div class='has-text-centered'>";
 echo "<a class='button is-light' href='conteudo.php'>Voltar para Conteúdo</a>";
 echo "</div>";

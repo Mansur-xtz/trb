@@ -30,3 +30,9 @@ if ($_POST['senha'] == "") {
     die($mensagem);
 }
 
+if($_GET['acao']=='login'){
+ (new ValidarUsuario())->retornar();
+
+    exit();
+}
+

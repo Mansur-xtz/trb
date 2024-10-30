@@ -1,9 +1,6 @@
 <?php
 require_once __DIR__ . "/../Model/UserBanco.php";
-// Redireciona o usuário para a página de conteúdo após login bem-sucedido
 
-header("Location: /conteudo.php");
-exit;
 class ValidarUsuario
 {
     public function retornar()
@@ -43,7 +40,9 @@ class ValidarUsuario
             Usuário logado
         </div>';
         echo $mensagem;
-
+        if(!empty($alunoExiste)){
+           require __DIR__."/../../conteudo.php";
+        }
         
     }
     
