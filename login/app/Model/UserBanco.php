@@ -12,17 +12,22 @@ class UserBanco {
             session_start();
         }
     }
-    public function cadastrarUsuario($nome,$senha,$ativo){
-        $sql = "INSERT INTO usuario(nome,senha,perfil_ativo) values (:u,:p,:a)";
-
+    public function cadastrarUsuario($nome, $senha, $ativo) {
+        // Verifica se o usuário já existe
+        $usuarioExistente = $this->buscarPorUsername($nome);
+        if (!empty($usuarioExistente)) {
+            throw new Exception("O nome de usuário já existe.");
+        }
+    
+        $sql = "INSERT INTO usuario(nome, senha, perfil_ativo) VALUES (:u, :p, :a)";
         $comando = $this->pdo->prepare($sql);
-        $comando->bindValue("u",$nome);
-        $comando->bindValue("p",$senha);
-        $comando->bindValue("a",$ativo,PDO::PARAM_BOOL);
-
+        $comando->bindValue(":u", $nome);
+        $comando->bindValue(":p", $senha);
+        $comando->bindValue(":a", $ativo, PDO::PARAM_BOOL);
+    
         return $comando->execute();
     }
-
+    
     public function editarUsuario($nome,$senha,$ativo){
         $sql = "INSERT INTO usuarios(nome,senha,perfil_ativo) values (:u,:p,:a)";
 
@@ -35,7 +40,7 @@ class UserBanco {
     }
 
     public function buscarPorUsername($u){
-        $sql = "SELECT * FROM usuarios WHERE nome=:u";
+        $sql = "SELECT * FROM usuario WHERE nome=:u";
 
         $comando = $this->pdo->prepare($sql);
         $comando->bindValue("u",$u);
@@ -46,7 +51,7 @@ class UserBanco {
     }
 
     public function atualizarUsuario($nome,$senha,$ativo){
-        $sql = "UPDATE usuarios set nome = :u, senha = :p, perfil_ativo = :a where nome = :u";
+        $sql = "UPDATE usuario set nome = :u, senha = :p, perfil_ativo = :a where nome = :u";
 
         $comando = $this->pdo->prepare($sql);
         $comando->bindValue("u",$nome);
@@ -57,7 +62,7 @@ class UserBanco {
     }
 
     public function excluirUsuario($nome){
-        $sql = "DELETE FROM usuarios WHERE nome = :u";
+        $sql = "DELETE FROM usuario WHERE nome = :u";
 
         $comando = $this->pdo->prepare($sql);
         $comando->bindValue("u",$nome);
@@ -66,7 +71,7 @@ class UserBanco {
     }
 
     public function verificarSeExiste($usuario,$senha){
-        $sql = "SELECT * FROM usuarios WHERE nome=:u and senha = :s and perfil_ativo = TRUE";
+        $sql = "SELECT * FROM usuario WHERE nome=:u and senha = :s and perfil_ativo = TRUE";
         $comando = $this->pdo->prepare($sql);
         $comando->bindValue("u",$usuario);
         $comando->bindValue("s",$senha);
@@ -76,7 +81,7 @@ class UserBanco {
     }
 
     public function listarUsuario(){
-        $sql = "SELECT * FROM usuarios";
+        $sql = "SELECT * FROM usuario";
         $comando = $this->pdo->prepare($sql);
         
         $comando->execute();

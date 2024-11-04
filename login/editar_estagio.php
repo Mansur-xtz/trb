@@ -2,14 +2,13 @@
 
 include 'header.php';
 
-
 if (!isset($_GET['id'])) {
     echo "<p class='notification is-danger'>ID do estágio não especificado.</p>";
     exit; 
 }
 
-$db = $this->pdo('banco.db');
-$id = isset($_GET['id']) ? $_GET['id'] :""; 
+$db = new PDO('sqlite:banco.db');
+$id = isset($_GET['id']) ? $_GET['id'] : ""; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['atualizar'])) {
@@ -20,18 +19,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $horario = $_POST['horario'];
 
         $stmt = $db->prepare("UPDATE estagios SET empresa = :empresa, funcionario = :funcionario, data = :data, horario = :horario WHERE id = :id");
-        $stmt->bindValue(':empresa', $empresa, SQLITE3_TEXT);
-        $stmt->bindValue(':funcionario', $funcionario, SQLITE3_TEXT);
-        $stmt->bindValue(':data', $data, SQLITE3_TEXT);
-        $stmt->bindValue(':horario', $horario, SQLITE3_TEXT);
-        $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+        $stmt->bindValue(':empresa', $empresa, PDO::PARAM_STR);
+        $stmt->bindValue(':funcionario', $funcionario, PDO::PARAM_STR);
+        $stmt->bindValue(':data', $data, PDO::PARAM_STR);
+        $stmt->bindValue(':horario', $horario, PDO::PARAM_STR);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
         echo "<p class='notification is-success'>Estágio atualizado com sucesso!</p>";
     } elseif (isset($_POST['excluir'])) {
         // Exclui o estágio
         $stmt = $db->prepare("DELETE FROM estagios WHERE id = :id");
-        $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
         echo "<p class='notification is-danger'>Estágio excluído com sucesso!</p>";
@@ -39,10 +38,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-
 $stmt = $db->prepare("SELECT * FROM estagios WHERE id = :id");
-$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
-$result = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
+$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+$stmt->execute();
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$result) {
     echo "<p class='notification is-danger'>Estágio não encontrado.</p>";
@@ -88,4 +87,4 @@ if (!$result) {
     </div>
 </section>
 
-<?php include 'footer.php'; $db->close(); ?>
+<?php include 'footer.php'; ?>
