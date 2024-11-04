@@ -1,40 +1,40 @@
 <?php
 
-include 'header.php';
+include 'header.php'; ?>
 
 
-$db = new SQLite3('banco.db');
-$results = $db->query("SELECT * FROM estagios");
+<section class='section'>
+    <div class='container'>
+        <h2 class='title has-text-centered'>Lista de Estágios</h2>
 
-echo "<section class='section'>";
-echo "<div class='container'>";
-echo "<h2 class='title has-text-centered'>Lista de Estágios</h2>";
+        <table class='table is-striped is-hoverable is-fullwidth'>
+            <thead>
+                <tr>
+                    <th>Empresa</th>
+                    <th>Funcionário</th>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
 
-echo "<table class='table is-striped is-hoverable is-fullwidth'>";
-echo "<thead><tr><th>Empresa</th><th>Funcionário</th><th>Data</th><th>Horário</th><th>Ações</th></tr></thead>";
-echo "<tbody>";
+<?php foreach($usuarios as $usuario):?>
+    <tr>
+<td><?=$usuario-></td>
+    </tr>
+    <?php endforeach?>
 
-while ($row = $results->fetchArray(SQLITE3_ASSOC)) {
-    echo "<tr>";
-    echo "<td>" . htmlspecialchars($row['empresa']) . "</td>";
-    echo "<td>" . htmlspecialchars($row['funcionario']) . "</td>";
-    echo "<td>" . htmlspecialchars($row['data']) . "</td>";
-    echo "<td>" . htmlspecialchars($row['horario']) . "</td>";
-    echo "<td><a class='button is-info is-small' href='editar_estagio.php?id={$row['id']}'>Editar</a></td>";
-    echo "</tr>";
-}
-
-echo "</tbody>";
-echo "</table>";
+            </tbody>
+        </table>
 
 
-echo "<div class='has-text-centered'>";
-echo "<a class='button is-light' href='conteudo.php'>Voltar para Conteúdo</a>";
-echo "</div>";
+        <div class='has-text-centered'>
+            <a class='button is-light' href='conteudo.php'>Voltar para Conteúdo</a>
+        </div>
 
-echo "</div>";
-echo "</section>";
-
-$db->close();
+    </div>
+</section>
+<?php
 include 'footer.php';
 ?>

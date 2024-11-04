@@ -1,10 +1,10 @@
 <?php
-require __DIR__ . "/../Model/UserBanco.php";
+
 
 class CadastrarUsuario {
-    public function retornar($nome, $senha, $ativo) {
+    public function retornar() {
         $userBanco = new UserBanco();
-        return $userBanco->cadastrarUsuario($nome, $senha, $ativo);
+        return $userBanco->cadastrarUsuario($_POST['usuario'], $_POST['senha'], TRUE);
     }
 }
 ?>

@@ -8,7 +8,7 @@ if (!isset($_GET['id'])) {
     exit; 
 }
 
-$db = new SQLite3('banco.db');
+$db = $this->pdo('banco.db');
 $id = isset($_GET['id']) ? $_GET['id'] :""; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

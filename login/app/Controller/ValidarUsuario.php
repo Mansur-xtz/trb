@@ -1,6 +1,4 @@
 <?php
-require_once __DIR__ . "/../Model/UserBanco.php";
-
 class ValidarUsuario
 {
     public function retornar()

@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $horario = $_POST['horario'];
 
     // Conexão com o banco de dados
-    $db = new SQLite3('banco.db');
+    $db = $this->pdo ('banco.db');
     $stmt = $db->prepare("INSERT INTO estagios (empresa, funcionario, data, horario) VALUES (:empresa, :funcionario, :data, :horario)");
     $stmt->bindValue(':empresa', $empresa, SQLITE3_TEXT);
     $stmt->bindValue(':funcionario', $funcionario, SQLITE3_TEXT);

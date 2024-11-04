@@ -4,10 +4,18 @@
     <div class="container">
         <div class="columns is-centered">
             <div class="column is-half">
-                <div class="box">
+                <div class="box"> <?php
+                                    $mensagem = '
+<div class="notification is-danger">
+    <button class="delete"></button>
+    Usuário vazio
+</div>';
+                                    echo ($mensagem);
+                                    ?>
                     <h1 class="title has-text-centered">Login</h1>
                     <form action="index.php?acao=login" method="post">
                         <div class="field">
+
                             <label class="label">Usuário</label>
                             <div class="control">
                                 <input class="input" type="text" placeholder="Seu usuário" name="usuario">
@@ -25,6 +33,10 @@
                             </div>
                         </div>
                     </form>
+                    <div class="control">
+        <a href="inicio.php" class="button is-dark">Voltar para o inicio</a>
+    </div>
+</div>
 
                     <div class="has-text-centered" style="margin-top: 15px;">
                         <p>Não tem uma conta? <a href="registro.php">Registre-se aqui</a>.</p>

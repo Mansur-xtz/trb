@@ -2,13 +2,16 @@
 
 ob_start(); // Inicia o buffer de saída
 session_start(); // Inicia a sessão para armazenar o login
-
+require __DIR__. "/app/model/Userbanco.php";
 require __DIR__ . "/app/Controller/ValidarUsuario.php";
+require __DIR__ . "/app/Controller/CadastrarUsuario.php";
+
 require __DIR__ . "/header.php";
 
 
+
 if (!isset($_POST['usuario']) || !isset($_POST['senha'])) {
-    header("Location: ./login.php");
+    header("Location: ./inicio.php");
     exit();
 }
 
@@ -35,4 +38,9 @@ if($_GET['acao']=='login'){
 
     exit();
 }
+if($_GET['acao']=='cadastra'){
+    (new CadastrarUsuario())->retornar();
+   
+       exit();
+   }
 

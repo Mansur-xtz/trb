@@ -6,7 +6,7 @@
             <div class="column is-half">
                 <div class="box">
                     <h1 class="title has-text-centered">Registro</h1>
-                    <form action="registro.php" method="post">
+                    <form action="index.php?acao=cadastra" method="post">
                         <div class="field">
                             <label class="label">Usuário</label>
                             <div class="control">
@@ -36,6 +36,10 @@
         <a href="login.php" class="button is-dark">Voltar para Login</a>
     </div>
 </div>
+<div class="control">
+        <a href="inicio.php" class="button is-dark">Voltar para o inicio</a>
+    </div>
+</div>
                     </div>
                 </div>
             </div>
@@ -45,22 +49,4 @@
 
 <?php require __DIR__ . "/footer.php"; ?>
 
-<?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require __DIR__ . "/app/Controller/CadastrarUsuario.php";
 
-    // Validação simples dos dados
-    $nome = $_POST['usuario'];
-    $senha = $_POST['senha'];
-    $confirmacao_senha = $_POST['confirmacao_senha'];
-
-    if ($senha !== $confirmacao_senha) {
-        echo '<div class="notification is-danger">As senhas não coincidem.</div>';
-        exit();
-    }
-
-    $cadastrar = new CadastrarUsuario();
-    $mensagem = $cadastrar->retornar($nome, $senha, true); // Aqui você pode definir o valor de 'ativo'
-    echo '<div class="notification is-success">' . $mensagem . '</div>';
-}
-?>
