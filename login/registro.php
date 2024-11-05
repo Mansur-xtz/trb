@@ -1,26 +1,22 @@
 <?php
 require __DIR__ . "/header.php"; 
 
+// Iniciar a sessão, se ainda não estiver iniciada
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Verifica se houve uma requisição POST para cadastro
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cadastrar = new CadastrarUsuario();
-    $cadastrar->retornar();
+    if ($cadastrar->retornar()) {
+        $_SESSION['mensagem_sucesso'] = "Usuário registrado com sucesso!";
+    } else {
+        $_SESSION['mensagem_erro'] = "Erro ao registrar o usuário. Tente novamente.";
+    }
 }
 
 ?>
-
-<section class="section">
-    <div class="container">
-        <div class="columns is-centered">
-            <div class="column is-half">
-
-                <?php
-                // Exibe a mensagem de erro se existir
-                if (isset($_SESSION['mensagem_erro'])) {
-                    echo "<div class='notification is-danger'>" . $_SESSION['mensagem_erro'] . "</div>";
-                    unset($_SESSION['mensagem_erro']); // Remove a mensagem após exibir para evitar repetição
-                }
-                ?>
 
                 <div class="box">
                     <h1 class="title has-text-centered">Registro</h1>
