@@ -12,17 +12,22 @@ class UserBanco {
             session_start();
         }
     }
-    public function cadastrarUsuario($nome,$senha,$ativo){
-        $sql = "INSERT INTO usuario(nome,senha,perfil_ativo) values (:u,:p,:a)";
-
+    public function cadastrarUsuario($nome, $senha, $ativo) {
+        // Verifica se o usuário já existe
+        $usuarioExistente = $this->buscarPorUsername($nome);
+        if (!empty($usuarioExistente)) {
+            throw new Exception("O nome de usuário já existe.");
+        }
+    
+        $sql = "INSERT INTO usuario(nome, senha, perfil_ativo) VALUES (:u, :p, :a)";
         $comando = $this->pdo->prepare($sql);
-        $comando->bindValue("u",$nome);
-        $comando->bindValue("p",$senha);
-        $comando->bindValue("a",$ativo,PDO::PARAM_BOOL);
-
+        $comando->bindValue(":u", $nome);
+        $comando->bindValue(":p", $senha);
+        $comando->bindValue(":a", $ativo, PDO::PARAM_BOOL);
+    
         return $comando->execute();
     }
-
+    
     public function editarUsuario($nome,$senha,$ativo){
         $sql = "INSERT INTO usuarios(nome,senha,perfil_ativo) values (:u,:p,:a)";
 

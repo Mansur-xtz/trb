@@ -1,5 +1,5 @@
 <?php
-class estagio {
+class Estagio {
 private string $empresa;
 private string $funcionario;
 private string $data;
@@ -36,11 +36,16 @@ public function gethorario(){
 public function sethorario($horario){
     return $this->horario=$horario;
 } 
-public function getid(){
-    return $this->id;
-} public function set($id){
-    return $this->id=$id;
-}
+
+    // Método setId
+    public function setId($id) {
+        $this->id = $id;
+    }
+
+    // Método getId
+    public function getId() {
+        return $this->id;
+    }
 }
 
 
