@@ -76,15 +76,15 @@ class Estagiosbanco {
     }
 
     // Método para listar todos os estágios
-    public function listarestagios() {
-        $sql = "SELECT * FROM estagios";
+    public function listarestagios($usuarioId) {
+        $sql = "SELECT * FROM estagios WHERE usuario_id = :usuarioId";
         $comando = $this->pdo->prepare($sql);
+        $comando->bindParam(':usuarioId', $usuarioId, PDO::PARAM_INT);
         $comando->execute();
-        $todosestagioss = $comando->fetchAll(PDO::FETCH_ASSOC);
+        $todosEstagios = $comando->fetchAll(PDO::FETCH_ASSOC);
 
-        return $this->hidratar($todosestagioss);
+        return $this->hidratar($todosEstagios);
     }
-
     // Método para hidratar os dados retornados em objetos estagios
     public function hidratar($array) {
         $todos = [];
@@ -101,10 +101,6 @@ class Estagiosbanco {
 
         return $todos;
     }
-    public function listarEstagiosPorUsuario($usuarioId) {
-       
-    }
-
 
     
 }

@@ -10,6 +10,9 @@ require __DIR__ . "/header.php";
 
 
 
+if (!isset($_POST['usuario']) || !isset($_POST['senha'])) {
+    header("Location:./inicio.php");
+}
 
 
 if ($_POST['usuario'] == "") {

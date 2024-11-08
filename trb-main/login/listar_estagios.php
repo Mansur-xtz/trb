@@ -2,9 +2,19 @@
 include 'header.php';
 
 require_once __DIR__ . "/app/model/Estagiobanco.php";
-$Estagiosbanco= new Estagiosbanco();
+$Estagiosbanco = new Estagiosbanco();
 
-$estagios = $Estagiosbanco->listarestagios();
+// Start session and get logged-in user ID
+session_start();
+$usuarioId = $_SESSION['usuario_id'] ?? null;
+
+if ($usuarioId) {
+    // Fetch internships associated with the logged-in user only
+    $estagios = $Estagiosbanco->listarestagios($usuarioId);
+} else {
+    echo "<p class='notification is-danger'>Erro: Usuário não autenticado.</p>";
+    exit;
+}
 
 // Display notification if redirected with a message
 if (isset($_GET['message']) && $_GET['message'] == 'excluido') {
@@ -20,7 +30,7 @@ if (isset($_GET['message']) && $_GET['message'] == 'excluido') {
             <thead>
                 <tr>
                     <th>Empresa</th>
-                    <th>Funcionário</th>
+                    <th>N° Funcionário</th>
                     <th>Data</th>
                     <th>Horário</th>
                     <th>Ações</th>

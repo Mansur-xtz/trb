@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="field">
                 <label class="label">Número de Funcionário:</label>
                 <div class="control">
-                    <input class="input" type="text" name="funcionario" required>
+                    <input class="input" type="number" name="funcionario" required>
                 </div>
             </div>
             <div class="field">

@@ -5,8 +5,7 @@
         <div class="columns is-centered">
             <div class="column is-half">
                 <div class="box">
-                    <div class="box"> 
-                        <?php
+                    <div class="box"> <?php
                                         $mensagem = '
 <div class="notification is-danger">
     <button class="delete"></button>

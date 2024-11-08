@@ -60,9 +60,9 @@ if (!$result) {
                 </div>
             </div>
             <div class="field">
-                <label class="label">Funcionário:</label>
+                <label class="label">N° Funcionário:</label>
                 <div class="control">
-                    <input class="input" type="text" name="funcionario" value="<?= htmlspecialchars($result['funcionario']) ?>" required>
+                    <input class="input" type="number" name="funcionario" value="<?= htmlspecialchars($result['funcionario']) ?>" required>
                 </div>
             </div>
             <div class="field">
