@@ -36,56 +36,60 @@ if ($usuarioId) {
     }
 
     // Exibe uma mensagem caso não tenha estágios
-    if (empty($estagios)) {
-        echo "<div class='notification is-warning'>Nenhum estágio encontrado.</div>";
-        echo "<div class='has-text-centered'>";
-        // Botão de adicionar estágio
-        echo "<a class='button is-primary is-rounded' href='adicionar_estagio.php'>Adicionar Estágio</a><br><br>";
-        // Botão de voltar para conteúdo
-        echo "<a class='button is-light is-rounded' href='conteudo.php'>Voltar para Conteúdo</a>";
-        echo "</div>";
-    } else {
+
         ?>
-        <section class="section">
-            <div class="container">
-                <h2 class="title has-text-centered is-size-3">Meus Estágios</h2>
-                <div class="table-container">
-                    <table class="table is-bordered is-striped is-hoverable is-fullwidth">
-                        <thead>
-                            <tr>
-                                <th class="has-text-centered">Empresa</th>
-                                <th class="has-text-centered">Funcionário</th>
-                                <th class="has-text-centered">Data</th>
-                                <th class="has-text-centered">Horário</th>
-                                <th class="has-text-centered">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($estagios as $estagio): ?>
-                                <tr>
-                                    <td class="has-text-centered"><?= htmlspecialchars($estagio['empresa'] ?? 'N/A') ?></td>
-                                    <td class="has-text-centered"><?= htmlspecialchars($estagio['funcionario'] ?? 'N/A') ?></td>
-                                    <td class="has-text-centered"><?= htmlspecialchars($estagio['data'] ?? 'N/A') ?></td>
-                                    <td class="has-text-centered"><?= htmlspecialchars($estagio['horario'] ?? 'N/A') ?></td>
-                                    <td class="has-text-centered">
-                                        <a class="button is-warning is-rounded is-small" href="editar_estagio.php?id=<?= $estagio['id'] ?>">Editar</a>
-                                        <a class="button is-danger is-rounded is-small" href="listar_estagios.php?excluir_id=<?= $estagio['id'] ?>" onclick="return confirm('Tem certeza que deseja excluir este estágio?')">Excluir</a>
-                                        <a class="button is-info is-rounded is-small" href="feedback_estagio.php?id=<?= $estagio['id'] ?>">Ver Feedback</a>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="has-text-centered">
-                    <a class="button is-light is-rounded" href="conteudo.php">Voltar para Conteúdo</a>
-                </div>
-            </div>
-        </section>
-        <?php
-    }
+       <section class="section">
+        <div class="container">
+            <h2 class="title has-text-centered">Lista de Estágios</h2>
+
+            <?php if (!empty($estagios)): ?>
+                <table class="table is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Nome do Estágio</th> <!-- Alterado para refletir o nome correto -->
+                            <th>Empresa</th>
+                            <th>Funcionário</th>
+                            <th>Data</th>
+                            <th>Horário</th>
+                            <th>Ações</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($estagios as $estagio): ?>
+                            <td><?= htmlspecialchars($estagio['curso'] ?? '') ?> Nome do estágio</td>
+                            <td><?= htmlspecialchars($estagio['empresa'] ?? '') ?></td>
+                            <td><?= htmlspecialchars($estagio['funcionario'] ?? '') ?></td>
+                            <td><?= htmlspecialchars($estagio['data'] ?? '') ?></td>
+                            <td><?= htmlspecialchars($estagio['horario'] ?? '') ?></td>
+                            </td>
+
+                            <td>
+                                <a href="editar_estagio.php?id=<?= htmlspecialchars($estagio['id']) ?>" class="button is-link">Editar Estágio</a>
+                                <a href="feedback_estagio.php?id=<?= htmlspecialchars($estagio['id']) ?>" class="button is-link">Ver Relatório</a>
+                            </td>
+                           
+        </div>
+        </tr> 
+        
+    <?php endforeach; ?>
+    </tbody>
+    </table>
+<?php else: ?>
+    <p class="notification is-warning">Você não tem estágios para exibir.</p>
+<?php endif; ?>
+
+</div>
+    </section>
+    <div class="has-text-centered">
+                                <a class="button is-light" href="conteudo.php">Voltar para Conteúdo</a>
+                            </div>
+
+<?php
 } else {
-    echo "<div class='notification is-danger'>Erro: Usuário não autenticado.</div>";
+    echo "<p class='notification is-danger'>Erro: Usuário não autenticado.</p>";
     exit();
 }
+
+include 'footer.php';
 ?>

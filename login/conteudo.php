@@ -19,7 +19,7 @@
                             <a href="listar_estagios.php" class="button is-primary is-fullwidth mb-3">Listar Seus Estágios</a>
                             <a href="avaliar_estagio.php" class="button is-primary is-fullwidth mb-3">Avaliar Estágio</a>
                             <a href="criar_relatorio.php" class="button is-primary is-fullwidth mb-3">Criar Relatório de Estágio</a>
-                           
+                            <a href="registro_estagiario.php" class="button is-primary is-fullwidth mb-3">Registrar novo Estagiario</a>
                         </div>
                     </div>
 
