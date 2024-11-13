@@ -39,6 +39,12 @@ class Estagiario {
             return false;
         }
     }
+
+public function listarEstagiarios() {
+    $stmt = $this->banco->query("SELECT * FROM estagiarios");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
     
 }
 ?>

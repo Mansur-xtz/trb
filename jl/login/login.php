@@ -22,7 +22,7 @@
                         <h1 class="title has-text-centered">Login</h1>
                         <form action="index.php?acao=login" method="post">
                             <div class="field">
-                                <label class="label">Usuário</label>
+                                <label class="label">Usuário/Email</label>
                                 <div class="control">
                                     <input class="input" type="text" placeholder="Seu usuário" name="usuario">
                                 </div>
